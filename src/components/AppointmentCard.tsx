@@ -1,7 +1,9 @@
-import { CardActionArea, CardActions, CardContent } from "@material-ui/core";
+import { CardContent } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import { Activity, Appointment, KnowledgeLevel } from "../shared";
+
+import { knowledgeLevelToString } from "../utils";
 
 interface IAppointment {
   appointment: Appointment;
@@ -12,39 +14,14 @@ const AppointmentCard = ({ appointment }: IAppointment) => {
     <Card>
       <CardHeader title={appointment.activity} />
       <CardContent>
-        <p>Test</p>
+        <strong>{appointment.clientName}</strong>
 
         <p>Duratie: {appointment.duration}</p>
 
-        <p>Level: {appointment.knowledgeLevel}</p>
+        <p>Level: {knowledgeLevelToString(appointment.knowledgeLevel)}</p>
       </CardContent>
     </Card>
   );
-};
-
-AppointmentCard.KnowledgeLevelToString = (level: KnowledgeLevel): string => {
-  switch (level) {
-    case KnowledgeLevel.HIGH:
-      return "High";
-
-    case KnowledgeLevel.MEDIUM:
-      return "Medium";
-
-    case KnowledgeLevel.LOW:
-      return "Low";
-
-    default:
-      return "Unknown Knowledge Level";
-  }
-};
-
-AppointmentCard.FakeAppointment = (): Appointment => {
-  return {
-    clientName: "Client",
-    duration: 100,
-    activity: Activity.PV,
-    knowledgeLevel: KnowledgeLevel.HIGH,
-  };
 };
 
 export default AppointmentCard;

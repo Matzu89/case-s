@@ -10,6 +10,7 @@ export enum KnowledgeLevel {
 }
 
 export interface Appointment {
+    id: string
     clientName: string
     duration: number
     activity: Activity
