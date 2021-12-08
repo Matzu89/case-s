@@ -1,33 +1,19 @@
-import { useDispatch, useSelector } from "react-redux";
-import AppointmentCard from "./components/AppointmentCard";
-import {
-  AppointmentState,
-  IAssignActionPayload,
-} from "./redux/appointmentReducer";
+import { AppBar, Container, Toolbar, Typography } from "@material-ui/core";
+import { AppointmentsTool } from "./components/AppointmentsTool/AppointmentsTool";
 
 function App() {
-  const unassigned = useSelector<
-    AppointmentState,
-    AppointmentState["unassigned"]
-  >((state) => state.unassigned);
-
-  const dispatch = useDispatch();
-
-  const assign = (payload: IAssignActionPayload) => {
-    dispatch({ type: "ASSIGN", payload });
-  };
-
   return (
     <>
-      {unassigned.map((x) => {
-        return (
-          <div onClick={() => {
-            assign({ appointmentId: x.id, routeId: "" })
-          }}>
-            <AppointmentCard appointment={x} key={x.id} />
-          </div>
-        );
-      })}
+    <AppBar>
+      <Toolbar>
+        <Container maxWidth="xl">
+          <Typography variant="h5">Afspraakkaartjes</Typography>          
+        </Container>
+      </Toolbar>      
+    </AppBar>
+    <Container maxWidth="xl" style={{ marginTop: '90px' }}>
+      <AppointmentsTool />
+    </Container>
     </>
   );
 }

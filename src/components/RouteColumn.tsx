@@ -12,7 +12,7 @@ const RouteColumn = ({ route } : IRouteColumn) => {
     return (
         <Card>
             <CardHeader title={name} subheader={knowledgeLevelToString(knowledgeLevel)} />
-            <CardContent style={{ maxHeight: '600px', overflowY: 'scroll'}}>
+            <CardContent style={{ maxHeight: 'calc(100vh - 225px)', overflowY: 'scroll'}}>
                 {appointments.map(x => <AppointmentCard appointment={x} key={x.id} />)}
             </CardContent>
         </Card>
