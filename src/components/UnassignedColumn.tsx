@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader } from "@material-ui/core";
 import { Droppable } from "react-beautiful-dnd";
-import { Appointment, AppointmentRoute } from "../shared";
+import { Appointment } from "../shared";
 import { getTotalDuration } from "../utils";
 import AppointmentCard from "./AppointmentCard";
 
@@ -24,7 +24,7 @@ export const UnassignedColumn = ({ unassigned }: { unassigned: Appointment[] }) 
               }}
               {...provided.droppableProps}
             >
-              {unassigned.map((x, idx) => (
+              {items.map((x, idx) => (
                 <AppointmentCard appointment={x} key={x.id} index={idx} />
               ))}
                <div style={{ padding: "0.25rem 0"}}>

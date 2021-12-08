@@ -2,7 +2,6 @@ import { Grid } from "@material-ui/core";
 import { useCallback } from "react";
 import {
   DragDropContext,
-  DragStart,
   DropResult,
   ResponderProvided,
 } from "react-beautiful-dnd";
@@ -30,7 +29,7 @@ export const AppointmentsTool = () => {
         dispatch<AssignAction>({ type: "ASSIGN", payload: { appointmentId: result.draggableId, routeId: result.destination?.droppableId ?? "", currentRouteId: result.source.droppableId, destinationIndex: result.destination?.index ?? 0}})
       }
     },
-    []
+    [dispatch]
   );
 
   return (
