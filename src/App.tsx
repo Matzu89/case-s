@@ -1,16 +1,34 @@
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import AppointmentCard from "./components/AppointmentCard";
-import RouteColumn from "./components/RouteColumn";
-import { KnowledgeLevel } from "./shared";
-import { createAppointmentsList } from "./utils";
+import {
+  AppointmentState,
+  IAssignActionPayload,
+} from "./redux/appointmentReducer";
 
 function App() {
+  const unassigned = useSelector<
+    AppointmentState,
+    AppointmentState["unassigned"]
+  >((state) => state.unassigned);
+
+  const dispatch = useDispatch();
+
+  const assign = (payload: IAssignActionPayload) => {
+    dispatch({ type: "ASSIGN", payload });
+  };
+
   return (
-    <RouteColumn
-      name={"Testcolom"}
-      knowledgeLevel={KnowledgeLevel.LOW}
-      appointments={createAppointmentsList(KnowledgeLevel.HIGH, 100)}
-    />
+    <>
+      {unassigned.map((x) => {
+        return (
+          <div onClick={() => {
+            assign({ appointmentId: x.id, routeId: "" })
+          }}>
+            <AppointmentCard appointment={x} key={x.id} />
+          </div>
+        );
+      })}
+    </>
   );
 }
 

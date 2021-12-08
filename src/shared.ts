@@ -16,3 +16,10 @@ export interface Appointment {
     activity: Activity
     knowledgeLevel: KnowledgeLevel
 }
+
+export interface AppointmentRoute {
+    id: string,
+    name: string,
+    knowledgeLevel: KnowledgeLevel,
+    appointments: Appointment[]
+}
