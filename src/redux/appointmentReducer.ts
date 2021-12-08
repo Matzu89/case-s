@@ -34,7 +34,7 @@ export const appointmentReducer = (
           )[0] : state.unassigned.filter(
             (x) => x.id === action.payload.appointmentId
           )[0];        
-          
+
         if (!appointment) {
             return state;
         }
@@ -42,6 +42,10 @@ export const appointmentReducer = (
         const unassigned = state.unassigned.filter(
             (x) => x.id !== action.payload.appointmentId
           );
+
+          if (routeId === "unassigned") {
+              unassigned.splice(destinationIndex, 0, appointment)
+          }
 
         const routes = state.routes.map(r => { 
             
@@ -62,9 +66,7 @@ export const appointmentReducer = (
             }
 
             return r;
-        });
-
-        console.log({ routes });
+        });        
 
       return {
         ...state,

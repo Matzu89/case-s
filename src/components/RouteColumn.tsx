@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader } from "@material-ui/core";
 import { Droppable } from "react-beautiful-dnd";
 import { AppointmentRoute } from "../shared";
-import { knowledgeLevelToString } from "../utils";
+import { getTotalDuration, knowledgeLevelToString } from "../utils";
 import AppointmentCard from "./AppointmentCard";
 
 interface IRouteColumn {
@@ -10,11 +10,13 @@ interface IRouteColumn {
 
 const RouteColumn = ({ route }: IRouteColumn) => {
   const { id, name, knowledgeLevel, appointments } = route;
+  const totalDuration = getTotalDuration(appointments);
+  const title = `${name} - ${knowledgeLevelToString(knowledgeLevel)}`;
   return (
     <Card>
       <CardHeader
-        title={name}
-        subheader={knowledgeLevelToString(knowledgeLevel)}
+        title={title}
+        subheader={`${totalDuration} minutes`}
       />
       <CardContent
         style={{ maxHeight: "calc(100vh - 225px)", minHeight: "calc(100vh - 225px)", overflowY: "scroll" }}

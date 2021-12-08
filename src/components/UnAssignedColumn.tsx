@@ -9,7 +9,7 @@ export const UnAssignedColumn = ({ unassigned }: { unassigned: Appointment[] }) 
 
   return (
     <Card>
-      <CardHeader title={"Afspraakkaartjes"} subheader={totalDuration} />
+      <CardHeader title={"Afspraakkaartjes"} subheader={`${totalDuration} minutes`} />
       <CardContent
         style={{ maxHeight: "calc(100vh - 225px)", minHeight: "calc(100vh - 225px)", overflowY: "scroll" }}
       >
@@ -26,7 +26,7 @@ export const UnAssignedColumn = ({ unassigned }: { unassigned: Appointment[] }) 
               {unassigned.map((x, idx) => (
                 <AppointmentCard appointment={x} key={x.id} index={idx} />
               ))}
-              <div>
+               <div style={{ padding: "0.25rem 0"}}>
               {provided.placeholder}
               </div>
             </div>

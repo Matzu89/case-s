@@ -11,13 +11,13 @@ import { v4 as uuidv4 } from "uuid";
 export const knowledgeLevelToString = (level: KnowledgeLevel): string => {
   switch (level) {
     case KnowledgeLevel.HIGH:
-      return "High";
+      return "Hoog";
 
     case KnowledgeLevel.MEDIUM:
-      return "Medium";
+      return "Middel";
 
     case KnowledgeLevel.LOW:
-      return "Low";
+      return "Laag";
 
     default:
       return "Unknown Knowledge Level";
