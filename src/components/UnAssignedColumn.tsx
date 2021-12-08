@@ -1,21 +1,38 @@
 import { Card, CardContent, CardHeader } from "@material-ui/core";
+import { Droppable } from "react-beautiful-dnd";
 import { Appointment, AppointmentRoute } from "../shared";
-import { knowledgeLevelToString } from "../utils";
+import { getTotalDuration } from "../utils";
 import AppointmentCard from "./AppointmentCard";
 
-interface IRouteColumn {
-    route: AppointmentRoute
-}
+export const UnAssignedColumn = ({ unassigned }: { unassigned: Appointment[] }) => {
+  const totalDuration = getTotalDuration(unassigned);
 
-const UnAssignedColumn = ({ unassigned } : { unassigned: Appointment[] }) => {    
-    return (
-        <Card>
-            <CardHeader title={"Afspraakkaartjes"} subtitle={"Nog niet toegewezen"} />
-            <CardContent style={{ maxHeight: "calc(100vh - 225px)", overflowY: 'scroll'}}>
-                {unassigned.map(x => <AppointmentCard appointment={x} key={x.id} />)}
-            </CardContent>
-        </Card>
-    );
-}
-
-export default UnAssignedColumn;
+  return (
+    <Card>
+      <CardHeader title={"Afspraakkaartjes"} subheader={totalDuration} />
+      <CardContent
+        style={{ maxHeight: "calc(100vh - 225px)", minHeight: "calc(100vh - 225px)", overflowY: "scroll" }}
+      >
+        <Droppable droppableId={"unassigned"} type="APPOINTMENT">
+          {(provided, snapshot) => (
+            <div
+              ref={provided.innerRef}
+              style={{
+                backgroundColor: snapshot.isDraggingOver ? "blue" : "white",
+                height: "100%"
+              }}
+              {...provided.droppableProps}
+            >
+              {unassigned.map((x, idx) => (
+                <AppointmentCard appointment={x} key={x.id} index={idx} />
+              ))}
+              <div>
+              {provided.placeholder}
+              </div>
+            </div>
+          )}
+        </Droppable>
+      </CardContent>
+    </Card>
+  );
+};
