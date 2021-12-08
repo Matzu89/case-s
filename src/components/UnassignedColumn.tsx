@@ -4,8 +4,9 @@ import { Appointment, AppointmentRoute } from "../shared";
 import { getTotalDuration } from "../utils";
 import AppointmentCard from "./AppointmentCard";
 
-export const UnAssignedColumn = ({ unassigned }: { unassigned: Appointment[] }) => {
+export const UnassignedColumn = ({ unassigned }: { unassigned: Appointment[] }) => {
   const totalDuration = getTotalDuration(unassigned);
+  const items = unassigned.sort((a, b) => a.clientName.localeCompare(b.clientName))
 
   return (
     <Card>

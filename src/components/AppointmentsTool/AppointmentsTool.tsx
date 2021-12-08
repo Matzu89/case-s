@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppointmentState, AssignAction } from "../../redux/appointmentReducer";
 import { AppointmentRoute } from "../../shared";
 import RouteColumn from "../RouteColumn";
-import { UnAssignedColumn } from "../UnAssignedColumn";
+import { UnassignedColumn } from "../UnassignedColumn";
 
 export const AppointmentsTool = () => {
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ export const AppointmentsTool = () => {
     <DragDropContext onDragEnd={onDragEnd}>
       <Grid container spacing={1}>
         <Grid item xs={12} md={3}>
-          <UnAssignedColumn unassigned={unassigned} />
+          <UnassignedColumn unassigned={unassigned} />
         </Grid>
         {routes.map((x) => (
           <AppointmentsTool.Route route={x} key={x.id} />
